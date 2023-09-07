@@ -1,5 +1,6 @@
 import { Badge, Container, Dropdown, FormControl, Navbar, Nav, } from "react-bootstrap"
 import { TiShoppingCart } from "react-icons/ti"
+import { Link } from "react-router-dom"
 
 // See more infor about navbar here https://react-bootstrap-v4.netlify.app/components/navbar/
 // https://react-bootstrap.netlify.app/docs/forms/form-control/
@@ -8,7 +9,7 @@ const Header = () => {
     <Navbar bg="primary" variant="dark" style={{height:85}}>
         <Container>
             <Navbar.Brand>
-                <a>Cart</a>
+                <Link to="/">Cart</Link>
             </Navbar.Brand>
             <Navbar.Text className="search">
                 <FormControl
