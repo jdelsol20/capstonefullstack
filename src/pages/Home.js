@@ -10,7 +10,7 @@ const Home = () => {
 // get products from product context
   const { products } = useContext(ProductContext);
   // console.log(products);
-// get electronics & jewelery clothing only via category
+// get electronics & jewelery category
   const filteredProducts = products.filter(item => {
     return (
     item.category === "electronics" || 
@@ -23,11 +23,7 @@ const Home = () => {
       <div className='home-container'>
         <div className='grid'>
           {filteredProducts.map(product => {
-            return <div className='products-id' 
-            key={product.id}
-            >
-              {product.title}
-            </div>
+            return <Product product={product} key={product.id} />;
           })}
         </div>
       </div>
