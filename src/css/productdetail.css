@@ -1,0 +1,35 @@
+/* Linked to ProductDetail.js when eye icon clicked this provides the styling */
+
+
+.product-detail-container {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.product-detail-image-container {
+  position: relative; /* Add relative positioning to the container */
+}
+
+.product-detail-image {
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+  display: block; /* Add display: block to the image */
+  margin: 0 auto; /* Center the image */
+}
+
+.add-to-cart-button {
+  background-color: #ff0000; /* Set the initial background color to red */
+  color: #fff; /* Set text color */
+  padding: 10px 20px; /* Add padding */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s; /* Add transition for hover effect */
+}
+
+/* Hover effect for the Add to Cart button */
+.add-to-cart-button:hover {
+  background-color: #007bff; /* Change background color to blue on hover */
+}
