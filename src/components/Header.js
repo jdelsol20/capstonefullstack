@@ -4,6 +4,7 @@ import { TiShoppingCart } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import Cart from "./Cart";
 import { CartContext } from "../context/CartContext";
+import '../css/header.css'
 
 const Header = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -40,6 +41,13 @@ const Header = ({ onSearch }) => {
 
   // Calculate the total quantity of items in the cart
   const totalItemsInCart = cart.reduce((total, item) => total + item.amount, 0);
+
+  // Add a function to handle login
+  const handleLogin = () => {
+    // Implement your login logic here
+    // For example, you can open a login modal or navigate to a login page
+    // Update the authentication state upon successful login
+  };
 
   return (
     <Navbar bg="dark" variant="dark" style={{ height: 85 }}>
@@ -92,6 +100,8 @@ const Header = ({ onSearch }) => {
               <Cart />
             </Dropdown.Menu>
           </Dropdown>
+          {/* Added a "Login" button */}
+          <button className="login-button" onClick={handleLogin}>Login</button>
         </Nav>
       </Container>
     </Navbar>

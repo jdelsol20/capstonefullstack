@@ -14,3 +14,17 @@
     max-height: 200px; /* Limit the maximum height of the results */
     overflow-y: auto; /* Add a scrollbar for long results */
   }
+
+  .login-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px; /* Adjust the margin to separate it from the cart icon */
+}
+
+.login-button:hover {
+    background-color: #d32f2f;
+}
