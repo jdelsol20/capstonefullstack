@@ -1,6 +1,6 @@
 // Import necessary modules from external libraries
 import React from 'react'; // Import the main React library
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import routing functionality from React Router DOM library
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'; // Import routing functionality from React Router DOM library
 
 // Import your custom pages and components
 import Home from './pages/Home'; // Import the Home page component
