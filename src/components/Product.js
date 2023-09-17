@@ -5,9 +5,12 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 //import icons
 import { BsPlus, BsEyeFill } from 'react-icons/bs';
+//import cart context
+import { CartContext } from '../context/CartContext';
 
 const Product = ({product}) => {
-    console.log(product);
+  const { addToCart } = useContext(CartContext);
+    // console.log(product);
   //destructure products 
   const { id, image, category, title, price } = product;
   return (
@@ -19,7 +22,7 @@ const Product = ({product}) => {
         </div>
         {/* Buttons */}
         <div className='buttons-container'>
-          <button>
+          <button onClick={()=> addToCart(product, id)} >
             <div className='button-wrapper'>
               <BsPlus className='button-icon' />
             </div>
