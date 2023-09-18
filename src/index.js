@@ -6,9 +6,12 @@ import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Context from './context/Context';
 import ProductProvider from './context/ProductContext';
+//sidebar provider
+import SidebarProvider from './context/SidebarContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <SidebarProvider>
   <ProductProvider>
   <React.StrictMode>
     <Context>
@@ -16,4 +19,5 @@ root.render(
     </Context>
   </React.StrictMode>
   </ProductProvider>
+  </SidebarProvider>
 );
