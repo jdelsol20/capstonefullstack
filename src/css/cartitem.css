@@ -1,0 +1,43 @@
+/* CSS for CartItem component */
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  
+  .cart-item img {
+    max-width: 100px; /* Adjust the maximum image width as needed */
+    margin-right: 10px;
+  }
+  
+  .item-details {
+    flex: 1;
+  }
+  
+  .item-details h3 {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .item-details p {
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    color: #555;
+  }
+  
+  button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  button:hover {
+    background-color: #d32f2f;
+  }

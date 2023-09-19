@@ -8,16 +8,20 @@ import Context from './context/Context';
 import ProductProvider from './context/ProductContext';
 //sidebar provider
 import SidebarProvider from './context/SidebarContext'
+//cart provider
+import CartProvider from './context/CartContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <SidebarProvider>
-  <ProductProvider>
+    <CartProvider>
+    <ProductProvider>
   <React.StrictMode>
     <Context>
         <App />
     </Context>
   </React.StrictMode>
   </ProductProvider>
+    </CartProvider>
   </SidebarProvider>
 );
