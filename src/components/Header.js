@@ -1,40 +1,94 @@
-import { Badge, Container, Dropdown, FormControl, Navbar, Nav, } from "react-bootstrap"
-import { TiShoppingCart } from "react-icons/ti"
-import { Link } from "react-router-dom"
-import Cart from "./Cart"
-import { useState } from "react"; // Import useState
+import React, { useState, useEffect, useContext } from "react";
+import { Badge, Container, Dropdown, FormControl, Navbar, Nav } from "react-bootstrap";
+import { TiShoppingCart } from "react-icons/ti";
+import { Link } from "react-router-dom";
+import Cart from "./Cart";
+import { CartContext } from "../context/CartContext";
 
-const Header = ({ onSearch }) => { // Accept onSearch function as a prop
-  const [searchQuery, setSearchQuery] = useState(''); // State for search query
+const Header = ({ onSearch }) => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  // Access the cart items from the CartContext
+  const { cart } = useContext(CartContext);
 
   const handleSearchInputChange = (e) => {
-    setSearchQuery(e.target.value);
-    onSearch(e.target.value); // Call the onSearch function with the search query
+    const query = e.target.value;
+    setSearchQuery(query);
+    onSearch(query);
+
+    if (query.trim() === '') {
+      setSearchResults([]);
+    }
   };
 
+  // Update the search results when the query changes
+  useEffect(() => {
+    if (searchQuery.trim() !== '') {
+      fetch(`https://fakestoreapi.com/products?q=${searchQuery}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setSearchResults(data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    } else {
+      setSearchResults([]);
+    }
+  }, [searchQuery]);
+
+  // Calculate the total quantity of items in the cart
+  const totalItemsInCart = cart.reduce((total, item) => total + item.amount, 0);
+
   return (
-    <Navbar bg="primary" variant="dark" style={{ height: 85 }}>
+    <Navbar bg="dark" variant="dark" style={{ height: 85 }}>
       <Container>
         <Navbar.Brand>
-          <Link to="/">Store</Link> {/* Updated title to "Store" */}
+          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            Store
+          </Link>
         </Navbar.Brand>
-        <Navbar.Text className="search">
-          <FormControl
-            style={{ width: 500 }}
-            placeholder="Search a product"
-            className="m-auto"
-            value={searchQuery} // Set the value of the input field
-            onChange={handleSearchInputChange} // Handle input changes
-          />
-        </Navbar.Text>
+        <Nav className="m-auto">
+          <Dropdown alignRight show={searchQuery.trim() !== ''}>
+            <Dropdown.Toggle variant="light" id="search-dropdown">
+              <FormControl
+                style={{
+                  width: 500,
+                  backgroundColor: "#f8f9fa",
+                  color: "#343a40",
+                  border: "none",
+                }}
+                placeholder="Search a product"
+                value={searchQuery}
+                onChange={handleSearchInputChange}
+              />
+            </Dropdown.Toggle>
+            <Dropdown.Menu style={{ minWidth: "100%" }}>
+              <div className="search-results">
+                {searchResults.map((result) => (
+                  <div
+                    key={result.id}
+                    style={{
+                      padding: "10px",
+                      borderBottom: "1px solid #ccc",
+                      color: "#343a40",
+                    }}
+                  >
+                    {result.title}
+                  </div>
+                ))}
+              </div>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Nav>
         <Nav>
           <Dropdown alignRight>
-            <Dropdown.Toggle variant="success">
-              <TiShoppingCart color="white" fontsize="25px" />
-              <Badge>{10}</Badge>
+            <Dropdown.Toggle variant="danger">
+              <TiShoppingCart color="white" fontSize="25px" />
+              <Badge>{totalItemsInCart}</Badge> {/* Display the total cart item count */}
             </Dropdown.Toggle>
             <Dropdown.Menu style={{ minWidth: 370 }}>
-              {/* Include the CartItem component to display cart items */}
               <Cart />
             </Dropdown.Menu>
           </Dropdown>
