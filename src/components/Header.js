@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Badge, Container, Dropdown, FormControl, Navbar, Nav } from "react-bootstrap";
 import { TiShoppingCart } from "react-icons/ti";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; // Import Link
 import Cart from "./Cart";
 import { CartContext } from "../context/CartContext";
-import '../css/header.css'
+import '../css/header.css';
 
 const Header = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-
-  // Access the cart items from the CartContext
   const { cart } = useContext(CartContext);
 
   const handleSearchInputChange = (e) => {
@@ -23,7 +21,6 @@ const Header = ({ onSearch }) => {
     }
   };
 
-  // Update the search results when the query changes
   useEffect(() => {
     if (searchQuery.trim() !== '') {
       fetch(`https://fakestoreapi.com/products?q=${searchQuery}`)
@@ -39,15 +36,7 @@ const Header = ({ onSearch }) => {
     }
   }, [searchQuery]);
 
-  // Calculate the total quantity of items in the cart
   const totalItemsInCart = cart.reduce((total, item) => total + item.amount, 0);
-
-  // Add a function to handle login
-  const handleLogin = () => {
-    // Implement your login logic here
-    // For example, you can open a login modal or navigate to a login page
-    // Update the authentication state upon successful login
-  };
 
   return (
     <Navbar bg="dark" variant="dark" style={{ height: 85 }}>
@@ -94,14 +83,18 @@ const Header = ({ onSearch }) => {
           <Dropdown alignRight>
             <Dropdown.Toggle variant="danger">
               <TiShoppingCart color="white" fontSize="25px" />
-              <Badge>{totalItemsInCart}</Badge> {/* Display the total cart item count */}
+              <Badge>{totalItemsInCart}</Badge>
             </Dropdown.Toggle>
             <Dropdown.Menu style={{ minWidth: 370 }}>
               <Cart />
             </Dropdown.Menu>
           </Dropdown>
-          {/* Added a "Login" button */}
-          <button className="login-button" onClick={handleLogin}>Login</button>
+        </Nav>
+        {/* Use Link to navigate to the login page */}
+        <Nav>
+          <Link to="/login" className="login-button">
+            Login
+          </Link>
         </Nav>
       </Container>
     </Navbar>
